@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * 缂栬瘧scss锛歴ass --watch --style expanded main.scss:main.css
+ * compile scss锛歴ass --watch --style expanded main.scss:main.css
  */
 /**
  * Reset some basic elements
@@ -26,7 +26,6 @@ body {
 .cover {
   color: #f1f1f1;
   height: 100%;
-  background: url("http://lakto.org/assets/img/cover.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -73,6 +72,42 @@ body {
   font-size: 133pt;
   border-radius: 50%;
   background-color: rgba(181, 181, 181, 0.4);
+}
+
+.site-name {
+  max-width: 940px;
+  padding: 0 10px;
+  margin: 0 auto;
+  text-align: right;
+  position: relative;
+  height: 100%;
+}
+
+.site-name__inner {
+  position: absolute;
+  top: 150px;
+  width: 100%;
+  right: 0;
+  width: 400px;
+}
+
+.site-name__inner .name {
+  font-size: 100px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.site-name__inner .desc {
+  font-size: 20px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.site-name__inner .btn {
+  padding: 10px 30px;
+  border: 2px solid #fff;
+  display: inline-block;
+  margin-top: 100px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=main.css.map */
