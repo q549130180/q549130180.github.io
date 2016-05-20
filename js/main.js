@@ -166,17 +166,14 @@ function exitFullscreen() {
     }
 }
 
-document.getElementById('fullScreenBtn').addEventListener('click',
-function() {
-    //document.documentElement;
-    launchFullscreen(document.getElementById('video'));
-    window.setTimeout(function exit() {
+document.getElementById('fullScreenBtn').addEventListener('click',function() {
+    debugger;
 
-        //检查浏览器是否处于全屏
-        if (invokeFieldOrMethod(document, 'FullScreen') || invokeFieldOrMethod(document, 'IsFullScreen') || document.IsFullScreen) {
-            exitFullscreen();
-        }
-    },
-    5 * 1000);
-},
-false);
+    //检查浏览器是否处于全屏
+    if (invokeFieldOrMethod(document, 'FullScreen') || invokeFieldOrMethod(document, 'IsFullScreen') || document.IsFullScreen) {
+        exitFullscreen();
+    }else{
+      launchFullscreen(document.documentElement);
+    }
+    
+},false);
