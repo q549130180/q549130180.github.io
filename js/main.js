@@ -1,41 +1,39 @@
-var todayPicture = images.test;
 
 /** 时钟 */
 setInterval(function() {
-  /** 是否显示24小时制 */
-  var is24hoursClock = true;
-  var seconds = new Date().getSeconds();
 
-  var sdegree = seconds * 6 + 270;
-  seconds = ("0" + seconds).slice(-2);
-  var secondSel = document.querySelector(".seconds");
+    var seconds = new Date().getSeconds();
 
-  secondSel.style.transform = "rotate(" + sdegree + "deg) translate(160px) rotate(-" + sdegree + "deg)";
-  secondSel.innerHTML = seconds;
+    var sdegree = seconds * 6 + 270;
+    seconds = ("0" + seconds).slice(-2);
+    var secondSel = document.querySelector(".seconds");
 
-  var minutes = new Date().getMinutes();
-  var mdegree = minutes * 6 + 270;
-  var minutesSel = document.querySelector(".minutes");
-  minutes = ("0" + minutes).slice(-2);
+    secondSel.style.transform = "rotate(" + sdegree + "deg) translate(160px) rotate(-" + sdegree + "deg)";
+    secondSel.innerHTML = seconds;
 
-  minutesSel.style.transform = "rotate(" + mdegree + "deg) translate(181px) rotate(-" + mdegree + "deg)";
-  minutesSel.innerHTML =  minutes;
+    var minutes = new Date().getMinutes();
+    var mdegree = minutes * 6 + 270;
+    var minutesSel = document.querySelector(".minutes");
+    minutes = ("0" + minutes).slice(-2);
 
-  var hours = new Date().getHours();
+    minutesSel.style.transform = "rotate(" + mdegree + "deg) translate(181px) rotate(-" + mdegree + "deg)";
+    minutesSel.innerHTML =  minutes;
 
-  var hoursSel = document.querySelector(".hours");
+    var hours = new Date().getHours();
 
-  /** 12 or 24 hours*/
-  if(!is24hoursClock){
-    if (hours > 12) {
-      hours = hours - 12;
+    var hoursSel = document.querySelector(".hours");
+
+    /** 12 or 24 hours*/
+    if(!config.is24hoursClock){
+      if (hours > 12) {
+        hours = hours - 12;
+      }
     }
-  }
 
 
-  hours = ("0" + hours).slice(-2);
+    hours = ("0" + hours).slice(-2);
 
-  hoursSel.innerHTML = hours;
+    hoursSel.innerHTML = hours;
 }, 1000);
 
 //判断访问终端
@@ -76,20 +74,37 @@ function GetRandomNum(Min,Max){
 
 /**
  * 改变body的背景图片
- * @param  {[type]} i [随机图片角标]
+ * @param  {[JSON]} pic [随机图片信息]
  * @return {[type]}   [description]
  */
-function changeBackground(i){
-    $("body").css("background-image","url('"+images.basePath+todayPicture[i].path+"')");
-}
+function changeBackground(pic){
+    $("body").css("background-image","url('"+images.basePath+pic.path+"')");
+};
+
+/**
+ * 随机获取一张可用的图片信息
+ * [getPicture description]
+ * @return {[type]} [description]
+ */
+function getPicture(){
+    var pic = config.todayPicture[GetRandomNum(0,config.todayPicture.length)];
+    if(pic.isActive === "Y"){
+      return pic;
+    }else{
+      getPicture();
+    }
+};
 
 /** 定时改变首页背景图片 */
 setInterval(function(){
-    console.log(1);
-    console.log("random:"+GetRandomNum(0,todayPicture.length));
-    changeBackground(0);
 
-},10000);
+    //随机获取可用图片信息
+    var pic = getPicture();
+
+    //背景变更
+    changeBackground(pic);
+
+},config.changeBackgroundTime);
 
 
 
@@ -116,7 +131,12 @@ var invokeFieldOrMethod = function(element, method) {
     return usablePrefixMethod;
 };
 
-//进入全屏
+
+/**
+ * 进入全屏
+ * @param  {[type]} element [description]
+ * @return {[type]}         [description]
+ */
 function launchFullscreen(element) {
 
     //此方法不可以在异步任务中执行，否则火狐无法全屏
@@ -143,7 +163,12 @@ function launchFullscreen(element) {
 
     }
 }
-//退出全屏
+
+
+/**
+ * 退出全屏
+ * @return {[type]} [description]
+ */
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -187,4 +212,21 @@ document.getElementById('fullScreenBtn').addEventListener('click',function() {
 $('#sh_cp_info').mouseover(function(){
   console.log(1);
   //$('#sh_cp_info_in').css('ackground-position-x','-252px');
+});
+
+
+var myQuotes =  new Array();
+//文本中停顿myQuotes.push("First ^1000 sentence.");
+
+myQuotes.push("Blog description");
+myQuotes.push("My Blog");
+
+$(".intro-text").typed({
+    strings: myQuotes,
+    typeSpeed: 10,  //速度
+    backDelay: 5000,//删除延时
+    startDelay: 200,//开始延时
+    loop: true,
+    loopCount: false,//Set False for infinite loop, or set any number for finite loop.
+    cursorChar: "|"
 });

@@ -115,4 +115,59 @@ body {
   background: transparent url(../images/icon.png) no-repeat;
 }
 
+.intro-text {
+  font-size: 26px;
+  white-space: pre;
+  text-shadow: 1px 0 1px #000;
+}
+
+/* Added in { Personal } for Typed Cursor in Header */
+.typed-cursor {
+  opacity: 1;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .typed-cursor {
+    font-size: 22px;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* END Added in { Personal } for Typed Cursor in Header */
+
 /*# sourceMappingURL=main.css.map */
