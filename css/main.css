@@ -111,4 +111,8 @@ body {
   cursor: pointer;
 }
 
+.hpcCopyInfo {
+  background: transparent url(../images/icon.png) no-repeat;
+}
+
 /*# sourceMappingURL=main.css.map */

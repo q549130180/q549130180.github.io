@@ -171,9 +171,20 @@ document.getElementById('fullScreenBtn').addEventListener('click',function() {
 
     //检查浏览器是否处于全屏
     if (invokeFieldOrMethod(document, 'FullScreen') || invokeFieldOrMethod(document, 'IsFullScreen') || document.IsFullScreen) {
+        //如果处于全图则退出全屏
         exitFullscreen();
     }else{
-      launchFullscreen(document.documentElement);
+        launchFullscreen(document.documentElement);
     }
-    
+
 },false);
+
+
+
+
+/** 图标 */
+
+$('#sh_cp_info').mouseover(function(){
+  console.log(1);
+  //$('#sh_cp_info_in').css('ackground-position-x','-252px');
+});
