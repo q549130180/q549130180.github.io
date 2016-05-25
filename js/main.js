@@ -87,12 +87,15 @@ function changeBackground(pic){
  * @return {[type]} [description]
  */
 function getPicture(){
-    var pic = config.todayPicture[GetRandomNum(0,config.todayPicture.length)];
+    var pic = config.todayPicture[GetRandomNum(0,config.todayPicture.length-1)];
+    
     if(pic.isActive === "Y"){
       return pic;
     }else{
       getPicture();
     }
+
+
 };
 
 /** 定时改变首页背景图片 */
