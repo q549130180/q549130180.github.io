@@ -100,8 +100,6 @@ function getPicture(){
 
 /** 定时改变首页背景图片 */
 setInterval(function(){
-
-
     //判断终端类型，手机不不变换背景
     if(!browser.versions.mobile && !browser.versions.ios && !browser.versions.android && !browser.versions.iPhone){
         //随机获取可用图片信息
@@ -110,8 +108,6 @@ setInterval(function(){
         //背景变更
         changeBackground(pic);
     }
-
-
 },config.changeBackgroundTime);
 
 
