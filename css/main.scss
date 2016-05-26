@@ -30,7 +30,11 @@ body {
 }
 
 
-
+.max-body-background {
+    @media(max-width:768px) {
+        background-image: url("../images/phone/001.jpg");
+    }
+}
 
 
 .cover {

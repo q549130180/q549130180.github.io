@@ -24,6 +24,12 @@ body {
   background-position: 50% 50%;
 }
 
+@media (max-width: 768px) {
+  .max-body-background {
+    background-image: url("../images/phone/001.jpg");
+  }
+}
+
 .cover {
   color: #f1f1f1;
   height: 100%;
