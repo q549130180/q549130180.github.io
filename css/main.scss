@@ -23,6 +23,11 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    opacity: 1;
+    transition:background-image 2s ease 0s;
+    -moz-transition:background-image 2s ease 0s; /* Firefox 4 */
+    -webkit-transition:background-image 2s ease 0s; /* Safari and Chrome */
+    -o-transition:background-image 2s ease 0s; /* Opera */
     //background-color: $clr-primary;
     //color: $clr-def-lightest;
     //position: relative;

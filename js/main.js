@@ -94,58 +94,65 @@ var imgReady = (function() {
     };
 
     return function(url, ready, load, error) {
-        var onready, width, height, newWidth, newHeight, img = new Image();
 
-        img.src = url;
+        try{
+          
+            var onready, width, height, newWidth, newHeight, img = new Image();
 
-        // 如果图片被缓存，则直接返回缓存数据
-        if (img.complete) {
-            ready.call(img);
-            load && load.call(img);
-            return;
-        };
+            img.src = url;
 
-        width = img.width;
-        height = img.height;
-
-        // 加载错误后的事件
-        img.onerror = function() {
-            error && error.call(img);
-            onready.end = true;
-            img = img.onload = img.onerror = null;
-        };
-
-        // 图片尺寸就绪
-        onready = function() {
-            newWidth = img.width;
-            newHeight = img.height;
-            if (newWidth !== width || newHeight !== height ||
-            // 如果图片已经在其他地方加载可使用面积检测
-            newWidth * newHeight > 1024) {
+            // 如果图片被缓存，则直接返回缓存数据
+            if (img.complete) {
                 ready.call(img);
-                onready.end = true;
+                load && load.call(img);
+                return;
             };
-        };
-        onready();
 
-        // 完全加载完毕的事件
-        img.onload = function() {
-            // onload在定时器时间差范围内可能比onready快
-            // 这里进行检查并保证onready优先执行
-            ! onready.end && onready();
+            width = img.width;
+            height = img.height;
 
-            load && load.call(img);
+            // 加载错误后的事件
+            img.onerror = function() {
+                error && error.call(img);
+                onready.end = true;
+                img = img.onload = img.onerror = null;
+            };
 
-            // IE gif动画会循环执行onload，置空onload即可
-            img = img.onload = img.onerror = null;
-        };
+            // 图片尺寸就绪
+            onready = function() {
+                newWidth = img.width;
+                newHeight = img.height;
+                if (newWidth !== width || newHeight !== height ||
+                // 如果图片已经在其他地方加载可使用面积检测
+                newWidth * newHeight > 1024) {
+                    ready.call(img);
+                    onready.end = true;
+                };
+            };
+            onready();
 
-        // 加入队列中定期执行
-        if (!onready.end) {
-            list.push(onready);
-            // 无论何时只允许出现一个定时器，减少浏览器性能损耗
-            if (intervalId === null) intervalId = setInterval(tick, 40);
-        };
+            // 完全加载完毕的事件
+            img.onload = function() {
+                // onload在定时器时间差范围内可能比onready快
+                // 这里进行检查并保证onready优先执行
+                ! onready.end && onready();
+
+                load && load.call(img);
+
+                // IE gif动画会循环执行onload，置空onload即可
+                img = img.onload = img.onerror = null;
+            };
+
+            // 加入队列中定期执行
+            if (!onready.end) {
+                list.push(onready);
+                // 无论何时只允许出现一个定时器，减少浏览器性能损耗
+                if (intervalId === null) intervalId = setInterval(tick, 40);
+            };
+        }catch(e){
+            console.log(e);
+        }
+
     };
 })();
 
@@ -189,8 +196,10 @@ function getPicture(){
 
 var newBackground = images.default[0];
 
+imgReady(config.baseurl+'/'+images.basePath+images.default[0].path,function(){});
+
 /** 定时改变首页背景图片 */
-setInterval(function(){
+var backInterval_id = setInterval(function(){
 
     //判断终端类型，手机不不变换背景
     if(!browser.versions.mobile && !browser.versions.ios && !browser.versions.android && !browser.versions.iPhone){
@@ -202,13 +211,20 @@ setInterval(function(){
 
         //预加载图片
         imgReady(config.baseurl+'/'+images.basePath+pic.path, function () {
-            console.log('size ready: width=' + this.width + '; height=' + this.height);
+            //console.log('size ready: width=' + this.width + '; height=' + this.height);
         });
 
         newBackground = pic;
     }
 
 },config.changeBackgroundTime);
+
+(function(){
+    if(browser.versions.mobile && browser.versions.ios && browser.versions.android && browser.versions.iPhone){
+        changeBackground(images.phone[0]);
+        clearTimeout(backInterval_id);
+    }
+})();
 
 
 

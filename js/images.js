@@ -21,7 +21,10 @@ images.scenery.push({"name":"012","path":"/scenery/scenery-012.jpg","type":"jpg"
 images.scenery.push({"name":"013","path":"/scenery/scenery-013.jpg","type":"jpg","TermType":"pc","isActive":"Y","description":""});
 images.scenery.push({"name":"014","path":"/scenery/scenery-014.jpg","type":"jpg","TermType":"pc","isActive":"Y","description":""});
 
+//风景
+images.phone = [];
 
+images.phone.push({"name":"001","path":"/phone/phone-001.jpg","type":"jpg","TermType":"phone","isActive":"Y","description":""});
 
 //默认
 images.default = [];
