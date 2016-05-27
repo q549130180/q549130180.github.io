@@ -19,3 +19,5 @@ config.blogStaticDescription = "";
 
 //动态文本
 config.blogStaticDescription = [];
+
+config.baseurl = "http://huangxubo.me";
