@@ -197,15 +197,15 @@ setInterval(function(){
         //随机获取可用图片信息
         var pic = getPicture();
 
+        //背景变更
+        changeBackground(newBackground);
+
         //预加载图片
         imgReady(config.baseurl+'/'+images.basePath+pic.path, function () {
             console.log('size ready: width=' + this.width + '; height=' + this.height);
         });
 
         newBackground = pic;
-
-        //背景变更
-        changeBackground(newBackground);
     }
 
 },config.changeBackgroundTime);
