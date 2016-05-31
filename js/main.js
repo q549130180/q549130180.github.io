@@ -96,7 +96,7 @@ var imgReady = (function() {
     return function(url, ready, load, error) {
 
         try{
-          
+
             var onready, width, height, newWidth, newHeight, img = new Image();
 
             img.src = url;
@@ -338,8 +338,8 @@ $('#sh_cp_info').mouseover(function(){
 var myQuotes =  new Array();
 //文本中停顿myQuotes.push("First ^1000 sentence.");
 
-myQuotes.push("Blog description");
-myQuotes.push("My Blog");
+myQuotes.push("Welcome to Blog");
+
 
 $(".intro-text").typed({
     strings: myQuotes,
